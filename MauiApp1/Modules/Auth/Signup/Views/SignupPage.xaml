@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:resx="clr-namespace:MauiApp1.GeneralResource"
+             x:Class="MauiApp1.Modules.Auth.Signup.Views.SignupPage">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <LinearGradientBrush x:Key="BackgroundBrush" StartPoint="0,0" EndPoint="0,1">
+                <GradientStop Color="{StaticResource Transparent}" Offset="0"/>
+                <GradientStop Color="{StaticResource PrimaryLight}" Offset="1"/>
+            </LinearGradientBrush>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+
+    <ContentPage.Content>
+        <AbsoluteLayout VerticalOptions="FillAndExpand"
+                HorizontalOptions="FillAndExpand">
+            <ScrollView x:Name="Scroller" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" AbsoluteLayout.LayoutBounds="0, 0, 1, 1" AbsoluteLayout.LayoutFlags="All">
+                <StackLayout x:Name="Stack_Main" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Padding="30" Background="{AppThemeBinding Light={StaticResource BackgroundBrush},Dark={StaticResource Gray900}}">
+
+
+                    <StackLayout VerticalOptions="CenterAndExpand" Spacing="10">
+                        <Label Text="{x:Static resx:ApplicationResource.Welcome_Text}" HorizontalOptions="CenterAndExpand" Style="{StaticResource Label_BlueThemedHeading}"/>
+
+                        <Entry x:Name="Entry_EmailAddress" Placeholder="{x:Static resx:ApplicationResource.EmailAddressText}" Keyboard="Email" FontSize="Medium" Margin="0,5,0,10"/>
+                        <Entry x:Name="Entry_Password" FontSize="Medium" Placeholder="{x:Static resx:ApplicationResource.PasswordText}" MaxLength="25" Margin="0,0,0,10" IsPassword="True" HorizontalOptions="FillAndExpand"/>
+                        <Entry x:Name="Entry_ConfirmPassword" FontSize="Medium" Placeholder="{x:Static resx:ApplicationResource.Re_EnterPasswordText}" MaxLength="25" IsPassword="True" HorizontalOptions="FillAndExpand"/>
+
+
+                        <StackLayout Orientation="Horizontal" Margin="0,40,0,20" Spacing="15">
+                            <Button x:Name="Button_Login" Style="{StaticResource Button_Normal}" HorizontalOptions="FillAndExpand" Text="{x:Static resx:ApplicationResource.LoginText}" Clicked="Button_Login_Clicked"/>
+                            <Button x:Name="Button_Signup" Style="{StaticResource Button_FullThemed}" HorizontalOptions="FillAndExpand" Text="{x:Static resx:ApplicationResource.SignupText}" Clicked="Button_Signup_Clicked"/>
+                        </StackLayout>
+
+
+                        <StackLayout HorizontalOptions="CenterAndExpand">
+                            <Image Source="guest.png" WidthRequest="30" HeightRequest="30"/>
+                            <Label Text="{x:Static resx:ApplicationResource.GuestModeText}" TextDecorations="Underline" TextColor="{AppThemeBinding Light={StaticResource HeadingBlue},Dark={StaticResource HeadingBlue}}" FontSize="Small" FontAttributes="Bold">
+                            </Label>
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer  Tapped="Label_GuestMode_Tapped"/>
+                            </StackLayout.GestureRecognizers>
+                    </StackLayout>
+                    </StackLayout>
+
+
+
+
+                    <HorizontalStackLayout Spacing="2" HorizontalOptions="CenterAndExpand" Margin="0,0,0,10">
+                        <Label Text="{x:Static resx:ApplicationResource.TermsOfServiceMessage}" FontSize="Small" TextColor="{AppThemeBinding Light={StaticResource Gray400},Dark={StaticResource Gray400}}"/>
+                        <Label x:Name="Label_TermsOfService" Text="{x:Static resx:ApplicationResource.TermsOfServiceText}" FontSize="Small" FontAttributes="Bold" TextColor="{AppThemeBinding Light={StaticResource Gray400},Dark={StaticResource Gray400}}">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="Label_TermsOfService_Tapped"/>
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </HorizontalStackLayout>
+                </StackLayout>
+            </ScrollView>
+
+
+            <AbsoluteLayout x:Name="LoaderAbsoluteLayout"
+                    BackgroundColor="{AppThemeBinding Light={StaticResource LoaderBackgroundColor}, Dark={StaticResource LoaderBackgroundColor}}"
+                    AbsoluteLayout.LayoutBounds="0.5,0.5,1,1"
+                    AbsoluteLayout.LayoutFlags="All"
+                IsVisible="{Binding IsBusy}">
+                <ActivityIndicator Color="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource Primary}}"
+                           AbsoluteLayout.LayoutBounds="0.5,0.5,0.1,0.1"
+                           AbsoluteLayout.LayoutFlags="All"
+                           IsVisible="True"
+                           x:Name="loader"
+                           IsRunning="True"/>
+            </AbsoluteLayout>
+        </AbsoluteLayout>
+    </ContentPage.Content>
+</ContentPage>
